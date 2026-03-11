@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-app-deployment
+  labels:
+    author: yasin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      name: postgres-app-pod
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: mydb
+          image: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: voting-secret
+                  key: password
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: voting-secret
+                  key: user
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: voting-secret
+                  key: dbname
+... 
