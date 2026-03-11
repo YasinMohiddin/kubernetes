@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ghost-daemon
+  labels:
+    app: cms
+spec:
+  selector:
+    matchLabels:
+      app: cms
+  template:
+    metadata:
+      name: ghost-pod
+      labels:
+        app: cms
+    spec:
+      containers:
+        - name: devil
+          image: ghost
+          ports:
+            - containerPort: 2368
+              hostPort: 1212
+          env:
+            - name: NODE_ENV
+              value: development
+...
+
+
+
+

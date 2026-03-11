@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkin-deply
+  labels:
+    app: ci-cd
+    author: yasin
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: ci-cd
+  template:
+    metadata:
+      name: jenkins-pod
+      labels:
+        app: ci-cd
+    spec:
+      containers: 
+        - name: myjenkins
+          image: jenkins/jenkins
+          ports:
+            - containerPort: 8080
+              hostPort: 3333
+...
+
+

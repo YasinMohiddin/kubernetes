@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-d
+  labels:
+    name: mynginx
+    author: yasin
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: proxy
+    template:
+     metadata:
+      labels:     
+        app: proxy
+        name: nginx-pod
+     spec:
+       containers:
+        - name: mynginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              hostPort: 2222
+...
+

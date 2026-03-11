@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx-pod 
+ labels:
+   name: proxy
+   author: yasin
+spec:
+  containers: 
+   - name: mynginx
+     image: nginx
+     ports: 
+      - containerPort: 8080
+        hostPort: 9999
+...

@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: jenkin-rs
+  labels:
+    app: ci-cd
+    author: mohiddin
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+     app: ci-cd
+  template:
+    metadata:
+     labels:
+        app: ci-cd
+    spec:
+      containers:
+        - name: myjenkins
+          image: jenkins/jenkins
+          ports:
+            - containerPort: 8080
+              hostPort: 1111
+...
+
